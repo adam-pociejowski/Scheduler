@@ -7,7 +7,66 @@
         <link th:href="@{css/style.css}" rel="stylesheet"/>
     </head>
     <body>
-        <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                           <label for="inputFileName">File name</label>
+                        <input data-bind="value: data().inputFileName" type="text" class="form-control" id="inputFileName"/>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="populationSize">Population</label>
+                        <input data-bind="value: data().populationSize" type="number" class="form-control" id="populationSize"/>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="eliteChromosomesNumber">Elite chromosomes</label>
+                        <input data-bind="value: data().eliteChromosomesNumber" type="number" class="form-control" id="eliteChromosomesNumber"/>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="tournamentSelectionNumber">Tournament chromosomes</label>
+                        <input data-bind="value: data().tournamentSelectionNumber" type="number" class="form-control" id="tournamentSelectionNumber"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="mutationRate">Mutation rate</label>
+                        <input data-bind="value: data().mutationRate" type="number" class="form-control" id="mutationRate"/>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="maxIterations">Max iterations</label>
+                        <input data-bind="value: data().maxIterations" type="number" class="form-control" id="maxIterations"/>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="daysAmount">Days amount</label>
+                        <input data-bind="value: data().daysAmount" type="number" class="form-control" id="daysAmount"/>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="minHour">Min hour</label>
+                        <input data-bind="value: minHour" type="number" class="form-control" id="minHour"/>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="maxHour">Max hour</label>
+                        <input data-bind="value: maxHour" type="number" class="form-control" id="maxHour"/>
+                    </div>
+                </div>
+            </div>
+
             <button class="btn btn-info" data-bind="click: generateSchedule">Generate schedule</button>
             <table class="scheduleTable" border="1" id="scheduleTable" data-bind="visible: showTable">
             </table>

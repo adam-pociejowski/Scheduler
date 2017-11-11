@@ -13,7 +13,8 @@ import com.valverde.scheduler.model.Class;
 
 public class Schedule {
 
-    public double calculateFitness() {
+    double calculateFitness() {
+        classMap = ScheduleUtils.prepareMap(slots);
         int score = 0;
         final Set<Class> classes = classMap.keySet();
         for (final Class clazz : classes) {
@@ -78,21 +79,27 @@ public class Schedule {
     private boolean isAnotherClassOverlapping(final Class clazz, final int classStartTime) {
         final int classEndTime = getClassEndIndex(clazz, classStartTime);
         for (int time = classStartTime; time <= classEndTime; time += config.getRoomsAmount()) {
-            if (isAnotherClassInSlot(slots[time], clazz))
+            if (isAnotherClassInSlot(time, clazz))
                 return true;
         }
         return false;
     }
 
-    private boolean isAnotherClassInSlot(final List<Class> classes, final Class clazz) {
-        for (Class cl : classes) {
-            if (!cl.equals(clazz))
-                return true;
+    public boolean isAnotherClassInSlot(final int slotIndex, final Class clazz) {
+        for (Class cl : classMap.keySet()) {
+            if (!cl.equals(clazz)) {
+                final Integer index = classMap.get(cl);
+                final int classEndTime = getClassEndIndex(clazz, index);
+                for (int i = index; i <= classEndTime; i += config.getRoomsAmount()) {
+                    if (i == slotIndex)
+                        return true;
+                }
+            }
         }
         return false;
     }
 
-    private int getClassEndIndex(final Class clazz, final int classStart) {
+    int getClassEndIndex(final Class clazz, final int classStart) {
         return classStart + ((clazz.getDuration() - 1) * config.getRoomsAmount());
     }
 

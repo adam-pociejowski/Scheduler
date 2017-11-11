@@ -10,10 +10,11 @@ function viewModel() {
         eliteChromosomesNumber: 6,
         tournamentSelectionNumber: 8,
         mutationRate: 0.05,
-        maxIterations: 10000,
+        maxIterations: 3000,
         daysAmount: 2,
         hoursAmount: (self.maxHour - self.minHour + 1)
     };
+    self.data = ko.observable(self.scheduleData);
 
     this.generateSchedule = function () {
         $.ajax({
@@ -25,6 +26,7 @@ function viewModel() {
                 self.showTable(true);
                 self.response(response);
                 self.generateTable(response);
+                console.log(response);
             },
             error: function (error) {
                 console.log(error);
@@ -97,7 +99,7 @@ function viewModel() {
         $('#scheduleTable').append('<tr id="days"></tr>');
         var daysContent = '<td></td>';
         for (var i = 0; i < scheduleData.daysAmount; i++) {
-            daysContent += '<td class="dayCell" colspan="'+scheduleData.hoursAmount+'">Day '+i+'</td>';
+            daysContent += '<td class="dayCell" colspan="'+scheduleData.hoursAmount+'">Day '+(i+1)+'</td>';
         }
         $('#days').append(daysContent);
     };

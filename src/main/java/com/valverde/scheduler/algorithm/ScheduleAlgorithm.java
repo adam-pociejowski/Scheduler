@@ -8,6 +8,7 @@ import com.valverde.scheduler.util.ScheduleUtils;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import com.valverde.scheduler.model.Class;
 import lombok.extern.apachecommons.CommonsLog;
 
@@ -32,7 +33,9 @@ public class ScheduleAlgorithm {
             }
         }
         log.info("Finished with generation: "+generation);
-        return population.getSchedules()[0];
+        final Schedule schedule = population.getSchedules()[0];
+        lookForAnomalies(schedule);
+        return schedule;
     }
 
     private Population evolve(final Population population) {
@@ -106,6 +109,19 @@ public class ScheduleAlgorithm {
         }
         tournamentPopulation.sort();
         return tournamentPopulation.getSchedules()[0];
+    }
+
+    private void lookForAnomalies(final Schedule schedule) {
+        final Set<Class> classes = schedule.getClassMap().keySet();
+        for (Class cl : classes) {
+            Integer classStartTime = schedule.getClassMap().get(cl);
+            final int classEndTime = schedule.getClassEndIndex(cl, classStartTime);
+            for (int time = classStartTime; time <= classEndTime; time += 3) {
+                if (schedule.isAnotherClassInSlot(time, cl)) {
+                    log.error("Another class overlapping "+cl.getId());
+                }
+            }
+        }
     }
 
     public ScheduleAlgorithm(final AlgorithmConfig config) {
