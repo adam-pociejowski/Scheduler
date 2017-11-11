@@ -1,0 +1,21 @@
+--P professor     id,name
+--C course        id,name
+--R classroom     id,name,capacity
+--G student group id,name,capacity
+--CL class        professor_id,course_id,group_id,duration
+P,1,Jan Kowalski
+P,2,Adam Małysz
+C,1,Mathematic Analisis
+C,2,Phisics
+C,3,WF
+R,1,A12,50
+R,2,B5,35
+R,3,A5,45
+G,1,Computer Science 1,30
+G,2,Computer Science 2,25
+CL,1,1,1,1,1
+CL,2,1,1,2,1
+CL,3,1,2,1,2
+CL,4,1,2,2,2
+CL,5,2,3,1,2
+CL,6,2,3,2,1

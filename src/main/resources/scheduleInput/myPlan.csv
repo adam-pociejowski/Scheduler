@@ -1,0 +1,48 @@
+--P professor     id,name
+--C course        id,name
+--R classroom     id,name,capacity
+--G student group id,name,capacity
+--CL class        professor_id,course_id,group_id,duration
+P,1,Dr inż. Alicja Janic
+P,2,Dr inż. Marek Krótkiewicz
+P,3,Dr inż. Elżbieta Kukla
+P,4,Dr inż. Marcin Maleszka
+P,5,Mgr Anna Bloch
+P,6,Dr inż. Agnieszka Piasecka
+P,7,Dr inż. Zbigniew Telec
+C,1,MPiAE
+C,2,Systemy multimedialne
+C,3,Metodologia proj. sys.
+C,4,Techniki inteligencji obl.
+C,5,Niemiecki
+C,6,Sematyczne usł. sieci web
+C,7,Mobilne Systemy inf.
+R,1,A12,50
+R,2,B5,35
+R,3,A5,45
+G,1,Group 1,40
+G,2,Group 2,35
+CL,1,1,1,1,2
+CL,2,1,1,2,2
+CL,3,2,3,1,2
+CL,4,2,3,2,2
+CL,5,2,3,1,2
+CL,6,2,3,2,2
+CL,7,3,2,1,2
+CL,8,3,2,2,2
+CL,9,3,2,1,2
+CL,10,3,2,2,2
+CL,11,4,4,1,2
+CL,12,4,4,2,2
+CL,13,4,4,1,2
+CL,14,4,4,2,2
+CL,15,5,5,1,3
+CL,16,5,5,2,3
+CL,17,6,6,1,2
+CL,18,6,6,2,2
+CL,19,6,6,1,2
+CL,20,6,6,2,2
+CL,21,7,7,1,2
+CL,22,7,7,2,2
+CL,23,7,7,1,2
+CL,24,7,7,2,2
