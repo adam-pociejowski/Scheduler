@@ -50,7 +50,7 @@ public class ScheduleAlgorithm {
                 crossoverPopulation.getSchedules()[i] = schedule;
             } else {
                 final Schedule parent1 = selectParentSchedule(population);
-                final Schedule parent2 = selectParentSchedule(population);
+                final Schedule parent2 = selectOtherParentSchedule(population, parent1);
                 final Schedule crossoverSchedule = crossoverSchedule(parent1, parent2);
                 crossoverSchedule.calculateFitness();
                 crossoverPopulation.getSchedules()[i] = crossoverSchedule;
@@ -102,13 +102,26 @@ public class ScheduleAlgorithm {
     }
 
     private Schedule selectParentSchedule(final Population population) {
+        return generateTournamentPopulation(population).getSchedules()[0];
+    }
+
+    private Schedule selectOtherParentSchedule(final Population population, final Schedule parent) {
+        final Population tournamentPopulation = generateTournamentPopulation(population);
+        for (Schedule schedule : tournamentPopulation.getSchedules()) {
+            if (!schedule.equals(parent))
+                return schedule;
+        }
+        return tournamentPopulation.getSchedules()[0];
+    }
+
+    private Population generateTournamentPopulation(final Population population) {
         final Population tournamentPopulation = new Population(config.getTournamentSelectionSize(), scheduleConfig);
         for (int i = 0; i < config.getTournamentSelectionSize(); i++) {
             int randomIndex = new Random().nextInt(config.getPopulationSize());
             tournamentPopulation.getSchedules()[i] = population.getSchedules()[randomIndex];
         }
         tournamentPopulation.sort();
-        return tournamentPopulation.getSchedules()[0];
+        return tournamentPopulation;
     }
 
     private void lookForAnomalies(final Schedule schedule) {
